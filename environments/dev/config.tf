@@ -14,7 +14,7 @@ variable "environment" {
 terraform {
   required_version = ">= 0.10.5"
   backend "s3" {
-    bucket = "aws-demo-terraform"
+    bucket = "aws-demo-terraform-us-east-2"
     key    = "dev/terraform.tfstate"
     region = "us-east-2"
     encrypt = true
@@ -25,7 +25,7 @@ terraform {
 data "terraform_remote_state" "default" {
   backend = "s3"
   config {
-    bucket = "aws-demo-terraform"
+    bucket = "aws-demo-terraform-us-east-2"
     key    = "dev/terraform.tfstate"
     region = "us=east-2"
     encrypt = true
