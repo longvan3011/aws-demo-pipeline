@@ -1,3 +1,9 @@
+data "archive_file" "lambda_zip" {
+    type          = "zip"
+    source_file   = "index.js"
+    output_path   = "lambda_function.zip"
+}
+
 resource "aws_iam_role" "iam_for_lambda" {
   name = "iam_for_lambda"
 
@@ -19,12 +25,12 @@ EOF
 }
 
 resource "aws_lambda_function" "test_lambda" {
-  filename         = "lambda_function_payload.zip"
+  filename         = "lambda_function.zip"
   function_name    = "lambda_function_name"
   role             = "${aws_iam_role.iam_for_lambda.arn}"
-  handler          = "exports.test"
-  source_code_hash = "${base64sha256(file("lambda_function_payload.zip"))}"
-  runtime          = "nodejs8.10"
+  handler          = "index.handler"
+  source_code_hash = "${base64sha256(file("lambda_function.zip"))}"
+  runtime          = "nodejs6.10"
 
   environment {
     variables = {
