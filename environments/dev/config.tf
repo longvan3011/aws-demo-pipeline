@@ -27,7 +27,7 @@ data "terraform_remote_state" "default" {
   config {
     bucket = "aws-demo-terraform-us-east-2"
     key    = "dev/terraform.tfstate"
-    region = "us=east-2"
+    region = "us-east-2"
     encrypt = true
   }
 }
