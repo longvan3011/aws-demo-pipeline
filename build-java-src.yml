@@ -8,7 +8,7 @@ phases:
   install:
     commands:
       # install required binary
-      - yum install $JAVA_VERSION -y
+      - sudo apt-get install oracle-java8-installer
       - curl -s "https://get.sdkman.io" | bash
       - source "/home/ec2-user/.sdkman/bin/sdkman-init.sh"
       - sdk install gradle 4.3.1
