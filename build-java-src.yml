@@ -25,11 +25,9 @@ phases:
       - echo " building $TF_ENV"
       - gradle build
 
-
   post_build:
     commands:
       - echo "build completed on `date`"
-
 
 artifacts:
   files:
