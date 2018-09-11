@@ -9,7 +9,7 @@ phases:
     commands:
       # install required binary
       - curl -s "https://get.sdkman.io" | bash
-      - source "/home/ec2-user/.sdkman/bin/sdkman-init.sh"
+      - source "/root/.sdkman/bin/sdkman-init.sh"
       - sdk install gradle 4.3.1
       
   pre_build:
