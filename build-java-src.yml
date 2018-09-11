@@ -1,0 +1,36 @@
+version: 0.2
+
+env:
+  variables:
+    JAVA_VERSION: "java-1.8.0-openjdk-devel"
+phases:
+
+  install:
+    commands:
+      # install required binary
+      - yum install $JAVA_VERSION -y
+      - curl -s "https://get.sdkman.io" | bash
+      - source "/home/ec2-user/.sdkman/bin/sdkman-init.sh"
+      - sdk install gradle 4.3.1
+      
+  pre_build:
+    commands:
+      # Workaround until TF supports creds via Task Roles when running on ECS or CodeBuild
+      # See: https://github.com/hashicorp/terraform/issues/8746
+
+  build:
+    commands:
+      - cd "$CODEBUILD_SRC_DIR"
+      - cd "app"
+      - echo " building $TF_ENV"
+      - gradle build
+
+
+  post_build:
+    commands:
+      - echo "build completed on `date`"
+
+
+artifacts:
+  files:
+    - '**/*'
